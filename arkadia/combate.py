@@ -1,10 +1,19 @@
 import os
+import sys
 import json
 import random
 from .itens import obter_item, adicionar_ao_inventario
 from .personagem import ganhar_xp
 
-DIRETORIO_DATA = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
+if getattr(sys, 'frozen', False):
+    _base_exe = os.path.dirname(sys.executable)
+    _base_meipass = getattr(sys, '_MEIPASS', _base_exe)
+    DIRETORIO_DATA = os.path.join(_base_exe, "data")
+    if not os.path.exists(DIRETORIO_DATA):
+        DIRETORIO_DATA = os.path.join(_base_meipass, "data")
+else:
+    DIRETORIO_DATA = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
+
 ARQUIVO_INIMIGOS = os.path.join(DIRETORIO_DATA, "inimigos.json")
 
 _INIMIGOS_CACHE = None

@@ -3,3 +3,6 @@ __pycache__/
 save_arkadia.json
 .vscode/
 .idea/
+dist/
+build/
+*.spec

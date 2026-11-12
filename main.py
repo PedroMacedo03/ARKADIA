@@ -18,7 +18,12 @@ from arkadia.itens import obter_nome_item
 LARGURA = 960
 ALTURA = 640
 ALTURA_CENARIO = 380
-DIRETORIO_BASE = os.path.dirname(os.path.abspath(__file__))
+
+if getattr(sys, 'frozen', False):
+    DIRETORIO_BASE = os.path.dirname(sys.executable)
+else:
+    DIRETORIO_BASE = os.path.dirname(os.path.abspath(__file__))
+
 ARQUIVO_SAVE = os.path.join(DIRETORIO_BASE, "save_arkadia.json")
 PASTA_ASSETS = os.path.join(DIRETORIO_BASE, "assets")
 
