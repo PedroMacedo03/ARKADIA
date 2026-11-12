@@ -308,11 +308,11 @@
       {"add_missao": "missao_ruinas"}
     ],
     "opcoes": [
-      {"texto": "Sala dos Guerreiros (Desafio de Força)", "ir_para": "sala_guerreiros"},
-      {"texto": "Biblioteca Perdida (Sabedoria Arcana)", "ir_para": "biblioteca"},
-      {"texto": "Cripta Subterrânea (Catacumbas Antigas)", "ir_para": "cripta"},
+      {"texto": "Sala dos Guerreiros (Força)", "ir_para": "sala_guerreiros"},
+      {"texto": "Biblioteca Perdida (Arcano)", "ir_para": "biblioteca"},
+      {"texto": "Cripta Subterrânea (Catacumbas)", "ir_para": "cripta"},
       {
-        "texto": "Câmara Secreta de Aurelion [Requer Pergaminho]",
+        "texto": "Câmara Secreta de Aurelion",
         "requer_item": {"item": "pergaminho_antigo", "quantidade": 1},
         "ir_para": "sala_secreta_ruinas"
       }
@@ -418,10 +418,10 @@
       "Sentinelas de armaduras negras bloqueiam a passagem principal."
     ],
     "opcoes": [
-      {"texto": "Enfrentar o Guarda Negro em combate", "ir_para": "combate_guarda"},
-      {"texto": "Buscar passagem estreita na rocha (Atalho Furtivo)", "ir_para": "atalho_ponte"},
+      {"texto": "Enfrentar o Guarda Negro", "ir_para": "combate_guarda"},
+      {"texto": "Passagem Secreta na Rocha (Furtivo)", "ir_para": "atalho_ponte"},
       {
-        "texto": "Exibir a Runa Real de Arkhor (Comandar os Guardas)",
+        "texto": "Exibir a Runa Real de Arkhor",
         "requer_reputacao": 20,
         "ir_para": "diplomacia_marca"
       }
@@ -501,15 +501,15 @@
     ],
     "opcoes": [
       {
-        "texto": "1. Reconstruir Arkhor e reinar com justiça junto ao povo",
+        "texto": "1. Reconstruir Arkhor com o Povo (Rei Justo)",
         "ir_para": "final_restauracao"
       },
       {
-        "texto": "2. Selar o trono e as magias para sempre, libertando o mundo",
+        "texto": "2. Selar o Trono para Sempre (Libertação)",
         "ir_para": "final_selo"
       },
       {
-        "texto": "3. Absorver a chama do Dragão e assumir o trono como Soberano Sombrio",
+        "texto": "3. Absorver a Chama do Dragão (Tirania)",
         "ir_para": "final_tirania"
       }
     ]

@@ -130,7 +130,8 @@ class JogoArkhor:
         self.fontes = {
             "titulo": pygame.font.SysFont("georgia", 22, bold=True),
             "texto": pygame.font.SysFont("arial", 16),
-            "ui": pygame.font.SysFont("arial", 14, bold=True)
+            "ui": pygame.font.SysFont("arial", 14, bold=True),
+            "ui_pequena": pygame.font.SysFont("arial", 12, bold=True)
         }
 
         self.cenarios = GerenciadorCenarios(LARGURA, ALTURA_CENARIO)
@@ -164,7 +165,7 @@ class JogoArkhor:
         if self.jogador:
             novos_avisos = executar_efeitos_cena(dados_cena, self.jogador)
             if novos_avisos:
-                self.mensagens_dialogo.extend(["", "✦ " + " | ".join(novos_avisos)])
+                self.mensagens_dialogo.extend(["", "• " + " | ".join(novos_avisos)])
 
             # Auto-save de checkpoint
             if cena_id not in ("menu_principal", "selecao_classe", "derrota"):
@@ -183,10 +184,10 @@ class JogoArkhor:
 
     def montar_botoes_cena(self, opcoes):
         self.botoes.clear()
-        x_base = 590
-        largura_btn = 345
+        x_base = 580
+        largura_btn = 360
         altura_btn = 36
-        espacamento = 8
+        espacamento = 7
 
         opcoes_validas = []
         for op in opcoes:
@@ -194,11 +195,11 @@ class JogoArkhor:
             callback = self._criar_callback_opcao(op)
             opcoes_validas.append((op["texto"], callback, habilitado))
 
-        y_inicial = ALTURA - 25 - (len(opcoes_validas) * (altura_btn + espacamento))
+        y_inicial = ALTURA - 20 - (len(opcoes_validas) * (altura_btn + espacamento))
 
         for i, (label, cb, hab) in enumerate(opcoes_validas):
             rect = (x_base, y_inicial + i * (altura_btn + espacamento), largura_btn, altura_btn)
-            self.botoes.append(Botao(rect, label, cb, self.fontes["ui"], habilitado=hab))
+            self.botoes.append(Botao(rect, label, cb, self.fontes["ui"], fonte_pequena=self.fontes["ui_pequena"], habilitado=hab))
 
     def _criar_callback_opcao(self, opcao):
         if "acao_especial" in opcao:
@@ -261,7 +262,7 @@ class JogoArkhor:
         for s in skills:
             tem_mp = self.jogador["mana"] >= s.get("custo_mp", 10)
             acoes.append((
-                f"✦ {s['nome']} ({s.get('custo_mp')} MP)",
+                f"> {s['nome']} ({s.get('custo_mp')} MP)",
                 lambda sk=s: mc.acao_usar_skill(sk),
                 tem_mp
             ))
@@ -280,8 +281,8 @@ class JogoArkhor:
             acoes.append((f"🌿 Antídoto ({qtd_ant})", mc.acao_usar_antidoto, qtd_ant > 0))
 
         # Monta os botões na tela
-        x_base = 590
-        largura_btn = 345
+        x_base = 580
+        largura_btn = 360
         altura_btn = 34
         espacamento = 6
         y_inicial = ALTURA - 20 - (len(acoes) * (altura_btn + espacamento))
@@ -293,7 +294,7 @@ class JogoArkhor:
                 fn()
                 if self.motor_combate:
                     self.atualizar_interface_combate()
-            self.botoes.append(Botao(rect, label, acao_wrapper, self.fontes["ui"], habilitado=hab))
+            self.botoes.append(Botao(rect, label, acao_wrapper, self.fontes["ui"], fonte_pequena=self.fontes["ui_pequena"], habilitado=hab))
 
     def vitoria_combate(self, destino, drops, xp, ouro, msgs_xp):
         self.motor_combate = None
