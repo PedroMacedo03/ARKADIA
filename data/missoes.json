@@ -1,0 +1,35 @@
+{
+  "missao_vila": {
+    "titulo": "O Massacre de Vila Lúmen",
+    "descricao": "Descubra o motivo do ataque à vila florestal e a ligação com a marca em sua mão.",
+    "recompensa_xp": 50,
+    "recompensa_ouro": 30
+  },
+  "missao_mago": {
+    "titulo": "O Enigma do Mago",
+    "descricao": "Encontre o sábio encapuzado nas brumas da floresta para entender o pacto ancestral.",
+    "recompensa_xp": 60,
+    "recompensa_ouro": 40
+  },
+  "missao_cacada": {
+    "titulo": "Segurança das Estradas",
+    "descricao": "Cace feras na floresta e leve 2 Peles de Lobo Sombrio para os aldeões de Vila Lúmen.",
+    "recompensa_xp": 75,
+    "recompensa_ouro": 60,
+    "recompensa_item": "elixir_arkhor",
+    "item_requerido": "pele_lobo",
+    "qtd_requerida": 2
+  },
+  "missao_ruinas": {
+    "titulo": "A Provação das Câmaras Antigas",
+    "descricao": "Explore as ruínas megalíticas e conquiste um artefato da dinastia de Aurelion.",
+    "recompensa_xp": 100,
+    "recompensa_ouro": 80
+  },
+  "missao_trono": {
+    "titulo": "O Destino de Arkhor",
+    "descricao": "Adentre o Castelo Negro, derrote ou subjugue o Dragão Ancestral e decida o futuro do reino.",
+    "recompensa_xp": 250,
+    "recompensa_ouro": 200
+  }
+}

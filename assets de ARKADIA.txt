@@ -1,0 +1,31 @@
+16-bit pixel art background, dark misty pine forest in heavy rain, gloomy atmosphere, ancient glowing sigil visible on a tree bark, cinematic lighting, no characters, side view, 2D RPG background --ar 16:9
+
+16-bit pixel art background, burning ruined medieval village, destroyed timber houses, smoking embers, grey overcast sky, desolate cobblestone street, no characters, 2D RPG background --ar 16:9
+
+16-bit pixel art background, ancient megalithic stone ruins, monolithic gateway with carved glowing magic runes, moss and weathered stone, mountain ridge in distance, 2D RPG background --ar 16:9
+
+16-bit pixel art background, interior stone hall, rows of carved knight statues lining the corridor, dramatic torchlight casting long shadows, dungeon interior, 2D RPG background --ar 16:9
+
+16-bit pixel art background, ancient forgotten archive library, towering stone bookshelves filled with glowing tomes, dusty light beams, ethereal blue arcane glow, 2D RPG background --ar 16:9
+
+16-bit pixel art background, dark dungeon crypt, damp stone walls, scattered bones on floor, burial alcoves, eerie green mist, cold underground lighting, 2D RPG background --ar 16:9
+
+16-bit pixel art background, dark jagged mountain peak, stone bridge over a deep abyss, stormy sky with lightning bolts, dark fortress silhouette ahead, 2D RPG background --ar 16:9
+
+16-bit pixel art background, massive dark castle throne hall, colossal stone pillars, embers and molten cracks on the floor, ominous atmospheric lighting, 2D RPG background --ar 16:9
+
+=================================================================================
+
+meu_jogo/
+├── main.py
+├── save_arkadia.json
+└── assets/
+    ├── menu.png
+    ├── floresta.png
+    ├── vila.png
+    ├── ruinas.png
+    ├── guerreiros.png
+    ├── biblioteca.png
+    ├── cripta.png
+    ├── ponte.png
+    └── castelo.png

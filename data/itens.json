@@ -1,0 +1,196 @@
+{
+  "pocao_vida": {
+    "nome": "Poção de Vida",
+    "tipo": "consumivel",
+    "descricao": "Restaura 45 pontos de vida imediatamente.",
+    "preco_compra": 25,
+    "preco_venda": 12,
+    "cura_vida": 45
+  },
+  "pocao_mana": {
+    "nome": "Poção de Mana",
+    "tipo": "consumivel",
+    "descricao": "Restaura 35 pontos de energia arcana.",
+    "preco_compra": 25,
+    "preco_venda": 12,
+    "cura_mana": 35
+  },
+  "elixir_arkhor": {
+    "nome": "Elixir de Arkhor",
+    "tipo": "consumivel",
+    "descricao": "Bebida sagrada que restaura 80 de vida e 50 de mana.",
+    "preco_compra": 70,
+    "preco_venda": 35,
+    "cura_vida": 80,
+    "cura_mana": 50
+  },
+  "antidoto": {
+    "nome": "Antídoto Herbal",
+    "tipo": "consumivel",
+    "descricao": "Ervas medicinais que curam envenenamento e queimadura.",
+    "preco_compra": 20,
+    "preco_venda": 10,
+    "cura_status": ["veneno", "queimadura"]
+  },
+  "espada_ferro": {
+    "nome": "Espada de Ferro",
+    "tipo": "arma",
+    "descricao": "Lâmina forjada equilibrada. Dano físico consistente.",
+    "preco_compra": 50,
+    "preco_venda": 25,
+    "ataque": 6,
+    "elemento": "fisico"
+  },
+  "cajado_aprendiz": {
+    "nome": "Cajado de Aprendiz",
+    "tipo": "arma",
+    "descricao": "Cajado entalhado com cristal de foco arcano.",
+    "preco_compra": 50,
+    "preco_venda": 25,
+    "ataque": 4,
+    "mana_max": 15,
+    "elemento": "arcano"
+  },
+  "arco_simples": {
+    "nome": "Arco Simples",
+    "tipo": "arma",
+    "descricao": "Arco flexível de madeira de teixo para disparos ágeis.",
+    "preco_compra": 50,
+    "preco_venda": 25,
+    "ataque": 5,
+    "elemento": "fisico"
+  },
+  "espada_arkhor": {
+    "nome": "Lâmina Real de Arkhor",
+    "tipo": "arma",
+    "descricao": "Espada lendária forjada na fundação do reino. Pulsa com poder sagrado.",
+    "preco_compra": 200,
+    "preco_venda": 100,
+    "ataque": 14,
+    "critico": 0.15,
+    "elemento": "arcano"
+  },
+  "cajado_aurelion": {
+    "nome": "Cetro de Aurelion",
+    "tipo": "arma",
+    "descricao": "Relíquia do Rei Aurelion. Canaliza calor incandescente e magias supremas.",
+    "preco_compra": 220,
+    "preco_venda": 110,
+    "ataque": 12,
+    "mana_max": 35,
+    "elemento": "fogo"
+  },
+  "arco_sombrio": {
+    "nome": "Arco da Névoa Sombria",
+    "tipo": "arma",
+    "descricao": "Encantado com ventos cortantes. Disparos causam sangramento profundo.",
+    "preco_compra": 200,
+    "preco_venda": 100,
+    "ataque": 13,
+    "efeito_golpe": "sangramento",
+    "elemento": "fisico"
+  },
+  "adaga_runica": {
+    "nome": "Adaga Rúnica",
+    "tipo": "arma",
+    "descricao": "Lâmina curta gravada com runas proibidas.",
+    "preco_compra": 90,
+    "preco_venda": 45,
+    "ataque": 9,
+    "critico": 0.20,
+    "elemento": "sombrio"
+  },
+  "cota_malha": {
+    "nome": "Cota de Malha",
+    "tipo": "armadura",
+    "descricao": "Anéis de ferro entrelaçados para boa proteção corporal.",
+    "preco_compra": 60,
+    "preco_venda": 30,
+    "defesa": 6
+  },
+  "manto_arcano": {
+    "nome": "Manto Arcano",
+    "tipo": "armadura",
+    "descricao": "Tecido impregnado com pó de safira que expande a mana.",
+    "preco_compra": 60,
+    "preco_venda": 30,
+    "defesa": 4,
+    "mana_max": 20
+  },
+  "couro_cacador": {
+    "nome": "Couro de Caçador",
+    "tipo": "armadura",
+    "descricao": "Armadura leve tratada com óleos naturais.",
+    "preco_compra": 60,
+    "preco_venda": 30,
+    "defesa": 5,
+    "esquiva": 0.08
+  },
+  "armadura_guardiao": {
+    "nome": "Couraça do Guardião Antigo",
+    "tipo": "armadura",
+    "descricao": "Placas de aço negro que absorvem parte de qualquer impacto.",
+    "preco_compra": 180,
+    "preco_venda": 90,
+    "defesa": 12,
+    "reducao_dano": 3
+  },
+  "manto_sombras": {
+    "nome": "Manto das Sombras",
+    "tipo": "armadura",
+    "descricao": "Torna o portador fugaz e evasivo perante ataques inimigos.",
+    "preco_compra": 170,
+    "preco_venda": 85,
+    "defesa": 8,
+    "esquiva": 0.15
+  },
+  "pele_lobo": {
+    "nome": "Pele de Lobo Sombrio",
+    "tipo": "material",
+    "descricao": "Couro grosso e aveludado muito procurado por mercadores.",
+    "preco_compra": 30,
+    "preco_venda": 18
+  },
+  "presa_sombria": {
+    "nome": "Presa Sombria",
+    "tipo": "material",
+    "descricao": "Dente pontiagudo que ainda emana uma aura fria.",
+    "preco_compra": 25,
+    "preco_venda": 15
+  },
+  "fragmento_runico": {
+    "nome": "Fragmento Rúnico",
+    "tipo": "material",
+    "descricao": "Pedra antiga brilhando com energias ressonantes.",
+    "preco_compra": 40,
+    "preco_venda": 25
+  },
+  "essencia_fogo": {
+    "nome": "Essência Ígnea",
+    "tipo": "material",
+    "descricao": "Cristal quente extraído do covil do dragão.",
+    "preco_compra": 60,
+    "preco_venda": 35
+  },
+  "espada_quebrada": {
+    "nome": "Espada Quebrada de Lúmen",
+    "tipo": "missao",
+    "descricao": "Lâmina quebrada encontrada após o ataque na vila. Traz o brasão do rei.",
+    "preco_compra": 0,
+    "preco_venda": 0
+  },
+  "pergaminho_antigo": {
+    "nome": "Pergaminho de Aurelion",
+    "tipo": "missao",
+    "descricao": "Entregue pelo Mago. Contém encantamentos de proteção e revela passagens secretas.",
+    "preco_compra": 0,
+    "preco_venda": 0
+  },
+  "livro_arkhor": {
+    "nome": "Tomo dos Reis de Arkhor",
+    "tipo": "missao",
+    "descricao": "Registros históricos originais do reinado de Aurelion e do pacto com o Dragão.",
+    "preco_compra": 0,
+    "preco_venda": 0
+  }
+}

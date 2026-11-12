@@ -1,0 +1,239 @@
+{
+  "lobo_sombrio": {
+    "nome": "Lobo Sombrio",
+    "vida_base": 45,
+    "vida_escala": 6,
+    "ataque_base": 12,
+    "ataque_escala": 1,
+    "defesa": 3,
+    "elemento": "sombrio",
+    "fraquezas": ["fogo"],
+    "resistencias": ["sombrio"],
+    "xp_base": 45,
+    "ouro_min": 15,
+    "ouro_max": 28,
+    "drops": [
+      {"item": "pele_lobo", "chance": 0.85},
+      {"item": "presa_sombria", "chance": 0.50},
+      {"item": "pocao_vida", "chance": 0.40}
+    ],
+    "acoes": [
+      {
+        "id": "mordida",
+        "nome": "Mordida Feroz",
+        "dano_mult": 1.0,
+        "aviso": "O Lobo Sombrio mostra as presas preparando um bote rápido."
+      },
+      {
+        "id": "uivo",
+        "nome": "Uivo Sombrio",
+        "dano_mult": 0.0,
+        "buff_ataque": 4,
+        "aviso": "O Lobo Sombrio ergue a cabeça uivando para a névoa! Ataque fortalecido."
+      },
+      {
+        "id": "dilacerar",
+        "nome": "Dilacerar",
+        "dano_mult": 1.3,
+        "status": "sangramento",
+        "duracao_status": 2,
+        "aviso": "O Lobo salta com as garras afiadas em um ataque dilacerante!"
+      }
+    ]
+  },
+  "guardiao_pedra": {
+    "nome": "Guardião de Pedra",
+    "vida_base": 90,
+    "vida_escala": 9,
+    "ataque_base": 18,
+    "ataque_escala": 2,
+    "defesa": 10,
+    "elemento": "terra",
+    "fraquezas": ["arcano"],
+    "resistencias": ["fisico"],
+    "xp_base": 85,
+    "ouro_min": 35,
+    "ouro_max": 55,
+    "drops": [
+      {"item": "fragmento_runico", "chance": 1.0},
+      {"item": "pocao_mana", "chance": 0.60}
+    ],
+    "acoes": [
+      {
+        "id": "golpe_granito",
+        "nome": "Punho de Granito",
+        "dano_mult": 1.0,
+        "aviso": "A estátua avança com um pesado golpe de punho rochoso."
+      },
+      {
+        "id": "postura_rocha",
+        "nome": "Fortalecer Rochas",
+        "dano_mult": 0.0,
+        "buff_defesa": 6,
+        "aviso": "O Guardião endurece sua carapaça de granito aumentando sua defesa!"
+      },
+      {
+        "id": "esmagar",
+        "nome": "Impacto Colossal",
+        "dano_mult": 1.45,
+        "status": "atordoado",
+        "duracao_status": 1,
+        "aviso": "O Guardião ergue os dois punhos para um ESMAGAMENTO devastador!"
+      }
+    ]
+  },
+  "cavaleiro_morto": {
+    "nome": "Cavaleiro Morto",
+    "vida_base": 105,
+    "vida_escala": 10,
+    "ataque_base": 22,
+    "ataque_escala": 2,
+    "defesa": 8,
+    "elemento": "sombrio",
+    "fraquezas": ["fogo", "arcano"],
+    "resistencias": ["sombrio"],
+    "xp_base": 105,
+    "ouro_min": 45,
+    "ouro_max": 70,
+    "drops": [
+      {"item": "adaga_runica", "chance": 0.40},
+      {"item": "pocao_vida", "chance": 0.70},
+      {"item": "fragmento_runico", "chance": 0.60}
+    ],
+    "acoes": [
+      {
+        "id": "estocada_sombria",
+        "nome": "Estocada Fria",
+        "dano_mult": 1.0,
+        "aviso": "O Cavaleiro investe com uma estocada precisa de sua lâmina enferrujada."
+      },
+      {
+        "id": "maldicao_tumulo",
+        "nome": "Névoa da Cripta",
+        "dano_mult": 0.8,
+        "status": "veneno",
+        "duracao_status": 3,
+        "aviso": "Uma fumaça pútrida se desprende do túmulo envolvendo você em miasma!"
+      },
+      {
+        "id": "corte_espectral",
+        "nome": "Corte da Morte",
+        "dano_mult": 1.35,
+        "aviso": "A lâmina do Cavaleiro Morto brilha em verde espectral preparando um golpe mortal!"
+      }
+    ]
+  },
+  "guarda_negro": {
+    "nome": "Guarda Negro",
+    "vida_base": 120,
+    "vida_escala": 10,
+    "ataque_base": 25,
+    "ataque_escala": 2,
+    "defesa": 11,
+    "elemento": "fisico",
+    "fraquezas": ["fogo", "arcano"],
+    "resistencias": ["fisico"],
+    "xp_base": 95,
+    "ouro_min": 55,
+    "ouro_max": 85,
+    "drops": [
+      {"item": "elixir_arkhor", "chance": 0.45},
+      {"item": "pocao_vida", "chance": 0.75}
+    ],
+    "acoes": [
+      {
+        "id": "golpe_alabarda",
+        "nome": "Corte de Alabarda",
+        "dano_mult": 1.0,
+        "aviso": "A sentinela de armadura negra desfere um corte horizontal impiedoso."
+      },
+      {
+        "id": "escudo_negro",
+        "nome": "Formação de Bloqueio",
+        "dano_mult": 0.0,
+        "buff_defesa": 8,
+        "aviso": "O Guarda se entrincheira atrás de um grande escudo de ferro temperado!"
+      },
+      {
+        "id": "investida_feroz",
+        "nome": "Investida de Choque",
+        "dano_mult": 1.4,
+        "aviso": "O Guarda corre com todo o peso de sua armadura em investida direta!"
+      }
+    ]
+  },
+  "dragao_ancestral": {
+    "nome": "DRAGÃO ANCESTRAL",
+    "vida_base": 240,
+    "vida_escala": 22,
+    "ataque_base": 36,
+    "ataque_escala": 3,
+    "defesa": 13,
+    "elemento": "fogo",
+    "fraquezas": ["arcano"],
+    "resistencias": ["fogo"],
+    "xp_base": 300,
+    "ouro_min": 150,
+    "ouro_max": 250,
+    "drops": [
+      {"item": "essencia_fogo", "chance": 1.0},
+      {"item": "elixir_arkhor", "chance": 1.0}
+    ],
+    "fases": [
+      {
+        "limiar_hp": 1.0,
+        "nome_fase": "Fase 1: Despertar das Brasas",
+        "acoes": [
+          {
+            "id": "garra_dragao",
+            "nome": "Garras Titânicas",
+            "dano_mult": 0.95,
+            "aviso": "O Dragão golpeia o chão de pedra com suas garras colossais."
+          },
+          {
+            "id": "sopro_fogo",
+            "nome": "Chama Ancestral",
+            "dano_mult": 1.3,
+            "status": "queimadura",
+            "duracao_status": 3,
+            "aviso": "O Dragão estala as presas incandescentes preparando uma rajada de fogo infernal!"
+          }
+        ]
+      },
+      {
+        "limiar_hp": 0.60,
+        "nome_fase": "Fase 2: Fúria Abissal",
+        "acoes": [
+          {
+            "id": "rugido_cataclismo",
+            "nome": "Rugido do Cataclismo",
+            "dano_mult": 0.7,
+            "status": "atordoado",
+            "duracao_status": 1,
+            "aviso": "O Dragão ruge com poder ensurdecedor fazendo os pilares do salão tremerem!"
+          },
+          {
+            "id": "meteoro_chamas",
+            "nome": "Cometa das Sombras",
+            "dano_mult": 1.45,
+            "status": "queimadura",
+            "duracao_status": 3,
+            "aviso": "Labaredas negras emergem do peito do Dragão... um golpe avassalador está por vir!"
+          }
+        ]
+      },
+      {
+        "limiar_hp": 0.25,
+        "nome_fase": "Fase 3: Último Suspiro de Arkhor",
+        "acoes": [
+          {
+            "id": "explosao_solar",
+            "nome": "Explosão de Aurelion",
+            "dano_mult": 1.6,
+            "aviso": "O Dragão concentra toda a energia ígnea restante em uma supernova devastadora!"
+          }
+        ]
+      }
+    ]
+  }
+}

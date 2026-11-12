@@ -1,0 +1,587 @@
+{
+  "menu_principal": {
+    "cenario": "menu.mp4",
+    "titulo": "AS CRÔNICAS DE ARKHOR",
+    "linhas": [
+      "Uma antiga profecia está despertando nas terras esquecidas.",
+      "Três séculos atrás, o reino de Arkhor desapareceu das crônicas.",
+      "Agora, forças ancestrais convocam o verdadeiro herdeiro.",
+      "",
+      "Escolha uma opção para iniciar sua jornada."
+    ],
+    "opcoes": [
+      {"texto": "Novo Jogo", "ir_para": "selecao_classe"},
+      {"texto": "Carregar Progresso", "acao_especial": "carregar_jogo"},
+      {"texto": "Sair", "acao_especial": "sair"}
+    ]
+  },
+  "selecao_classe": {
+    "cenario": "menu.mp4",
+    "titulo": "SELEÇÃO DE CLASSE",
+    "linhas": [
+      "Escolha seu caminho e aptidões marciais:",
+      "• Guerreiro: Maior resiliência e dano físico direto.",
+      "• Mago: Capacidade mágica refinada, feitiços de fogo e arcanos.",
+      "• Arqueiro: Habilidade equilibrada com ataques perfurantes e venenosos."
+    ],
+    "opcoes": [
+      {"texto": "Guerreiro", "acao_especial": "escolher_guerreiro"},
+      {"texto": "Mago", "acao_especial": "escolher_mago"},
+      {"texto": "Arqueiro", "acao_especial": "escolher_arqueiro"}
+    ]
+  },
+  "capitulo_1": {
+    "cenario": "floresta.mp4",
+    "titulo": "CAPÍTULO I — O DESPERTAR",
+    "linhas": [
+      "A chuva fria fustiga a copa das árvores coníferas.",
+      "Você desperta no solo úmido sem qualquer lembrança recente.",
+      "Na palma de sua mão direita, uma estranha runa emite luz tênue.",
+      "Ao norte, fumaça se eleva de uma pequena vila florestal.",
+      "Ao sul, a mata densa some sob um denso lençol de névoa."
+    ],
+    "opcoes": [
+      {"texto": "Ir para a Vila Lúmen", "ir_para": "vila_lumen"},
+      {"texto": "Adentrar a Floresta Profunda", "ir_para": "floresta_inicial"}
+    ]
+  },
+  "vila_lumen": {
+    "cenario": "vila.mp4",
+    "titulo": "VILA LÚMEN",
+    "linhas": [
+      "A vila sofreu um ataque recente. Cabanas ainda soltam fumaça.",
+      "Moradores assustados observam por trás de portas barricadas.",
+      "Uma moradora vem ao seu encontro com passos hesitantes.",
+      "\"Forasteiro... você veio ajudar nossa gente?\""
+    ],
+    "opcoes": [
+      {"texto": "Ajudar a vila e investigar", "ir_para": "ajudar_vila"},
+      {"texto": "Seguir direto para a floresta", "ir_para": "floresta_inicial"}
+    ]
+  },
+  "ajudar_vila": {
+    "cenario": "vila.mp4",
+    "titulo": "VILA LÚMEN — RELATO",
+    "linhas": [
+      "A mulher entrega uma lâmina antiga encontrada após o massacre.",
+      "\"As criaturas procuravam alguém com a mesma marca que brilha em sua mão!\"",
+      "\"Meu nome é Elora. Se precisar de abrigo, use nossa fogueira e o mercador.\""
+    ],
+    "efeitos": [
+      {"set_flag": "ajudou_vila", "valor": true},
+      {"add_item": "espada_quebrada"},
+      {"add_xp": 30},
+      {"add_reputacao": 15},
+      {"add_missao": "missao_vila"}
+    ],
+    "opcoes": [
+      {"texto": "Acessar o Povoado de Lúmen (Hub)", "ir_para": "hub_vila"},
+      {"texto": "Seguir rastros até a floresta", "ir_para": "floresta_inicial"}
+    ]
+  },
+  "hub_vila": {
+    "cenario": "vila.mp4",
+    "titulo": "VILA LÚMEN — REFÚGIO",
+    "linhas": [
+      "Os moradores começam a apagar os focos de incêndio.",
+      "Elora organiza suprimentos para os feridos próximos à fogueira.",
+      "Um mercador viajante abriu sua carroça na praça central."
+    ],
+    "opcoes": [
+      {"texto": "Conversar com Elora (Companheira / Missões)", "ir_para": "dialogo_elora"},
+      {"texto": "Mercador de Lúmen (Comprar / Vender)", "ir_para": "loja_vila"},
+      {"texto": "Descansar na Fogueira (Recuperar HP e MP)", "ir_para": "fogueira_descanso"},
+      {"texto": "Marchar para a Floresta Profunda", "ir_para": "floresta_inicial"}
+    ]
+  },
+  "dialogo_elora": {
+    "cenario": "vila.mp4",
+    "titulo": "ELORA — A CURANDEIRA DA VILA",
+    "linhas": [
+      "\"Os lobos das sombras ainda rondam a estrada velha.\"",
+      "\"Se você nos trouxer 2 Peles de Lobo Sombrio, posso lhe recompensar",
+      "com um Elixir sagrado guardado por minha família.\""
+    ],
+    "opcoes": [
+      {
+        "texto": "Entregar 2 Peles de Lobo (Concluir Missão)",
+        "requer_item": {"item": "pele_lobo", "quantidade": 2},
+        "ir_para": "entrega_peles_lobo"
+      },
+      {
+        "texto": "Pedir a Elora que o acompanhe como suporte",
+        "requer_flag": "ajudou_vila",
+        "bloqueia_flag": "companheiro_ativo",
+        "ir_para": "recrutar_elora"
+      },
+      {"texto": "Voltar à praça da vila", "ir_para": "hub_vila"}
+    ]
+  },
+  "recrutar_elora": {
+    "cenario": "vila.mp4",
+    "titulo": "COMPANHIA FORMADA",
+    "linhas": [
+      "Elora empunha ervas medicinais e uma adaga de caça.",
+      "\"Irei com você até os limites de Arkhor. Cuidarei de suas feridas em combate!\"",
+      "",
+      "(Elora curará você periodicamente durante os combates difíceis!)"
+    ],
+    "efeitos": [
+      {"set_flag": "companheiro_ativo", "valor": true},
+      {"set_flag": "companheiro_elora", "valor": true}
+    ],
+    "opcoes": [
+      {"texto": "Voltar ao Povoado", "ir_para": "hub_vila"}
+    ]
+  },
+  "entrega_peles_lobo": {
+    "cenario": "vila.mp4",
+    "titulo": "MISSÃO CUMPRIDA — SEGURANÇA DAS ESTRADAS",
+    "linhas": [
+      "Elora recebe as peles com gratidão profunda nos olhos.",
+      "\"Isso manterá nossas crianças aquecidas nas noites gélidas de Arkhor!\"",
+      "Ela lhe entrega 60 moedas de ouro e um valioso Elixir de Arkhor."
+    ],
+    "efeitos": [
+      {"remover_item": {"item": "pele_lobo", "quantidade": 2}},
+      {"add_item": "elixir_arkhor"},
+      {"add_ouro": 60},
+      {"add_xp": 75},
+      {"add_reputacao": 20},
+      {"concluir_missao": "missao_cacada"}
+    ],
+    "opcoes": [
+      {"texto": "Retornar ao Hub", "ir_para": "hub_vila"}
+    ]
+  },
+  "fogueira_descanso": {
+    "cenario": "vila.mp4",
+    "titulo": "DESCANSO NA FOGUEIRA",
+    "linhas": [
+      "O calor estalante da lenha acalma o peso da jornada.",
+      "Suas feridas cicatrizam e a energia mágica em seu corpo se harmoniza.",
+      "",
+      "(HP e MP foram restaurados ao máximo!)"
+    ],
+    "efeitos": [
+      {"curar_tudo": true}
+    ],
+    "opcoes": [
+      {"texto": "Levantar e prosseguir", "ir_para": "hub_vila"}
+    ]
+  },
+  "loja_vila": {
+    "cenario": "vila.mp4",
+    "titulo": "MERCADOR DE LÚMEN",
+    "linhas": [
+      "\"Bem-vindo, nobre guerreiro! Tenho poções, antídotos e lâminas afiadas.\"",
+      "Compre provisões ou venda os materiais obtidos nas suas caçadas."
+    ],
+    "opcoes": [
+      {"texto": "Comprar Poção de Vida (25 Moedas)", "requer_ouro": 25, "ir_para": "comprar_pocao_vida"},
+      {"texto": "Comprar Poção de Mana (25 Moedas)", "requer_ouro": 25, "ir_para": "comprar_pocao_mana"},
+      {"texto": "Comprar Antídoto Herbal (20 Moedas)", "requer_ouro": 20, "ir_para": "comprar_antidoto"},
+      {"texto": "Vender Materiais (Peles / Fragmentos)", "ir_para": "vender_materiais"},
+      {"texto": "Voltar à praça da vila", "ir_para": "hub_vila"}
+    ]
+  },
+  "comprar_pocao_vida": {
+    "cenario": "vila.mp4",
+    "titulo": "COMPRA CONCLUÍDA",
+    "linhas": ["Você adquiriu uma Poção de Vida."],
+    "efeitos": [{"add_ouro": -25}, {"add_item": "pocao_vida"}],
+    "opcoes": [{"texto": "Continuar negociando", "ir_para": "loja_vila"}]
+  },
+  "comprar_pocao_mana": {
+    "cenario": "vila.mp4",
+    "titulo": "COMPRA CONCLUÍDA",
+    "linhas": ["Você adquiriu uma Poção de Mana."],
+    "efeitos": [{"add_ouro": -25}, {"add_item": "pocao_mana"}],
+    "opcoes": [{"texto": "Continuar negociando", "ir_para": "loja_vila"}]
+  },
+  "comprar_antidoto": {
+    "cenario": "vila.mp4",
+    "titulo": "COMPRA CONCLUÍDA",
+    "linhas": ["Você adquiriu um Antídoto Herbal."],
+    "efeitos": [{"add_ouro": -20}, {"add_item": "antidoto"}],
+    "opcoes": [{"texto": "Continuar negociando", "ir_para": "loja_vila"}]
+  },
+  "vender_materiais": {
+    "cenario": "vila.mp4",
+    "titulo": "VENDA DE MATERIAIS",
+    "linhas": ["O mercador avalia os itens recolhidos nas suas caçadas."],
+    "opcoes": [
+      {
+        "texto": "Vender 1 Pele de Lobo (+18 Moedas)",
+        "requer_item": {"item": "pele_lobo", "quantidade": 1},
+        "ir_para": "vender_pele"
+      },
+      {
+        "texto": "Vender 1 Presa Sombria (+15 Moedas)",
+        "requer_item": {"item": "presa_sombria", "quantidade": 1},
+        "ir_para": "vender_presa"
+      },
+      {
+        "texto": "Vender 1 Fragmento Rúnico (+25 Moedas)",
+        "requer_item": {"item": "fragmento_runico", "quantidade": 1},
+        "ir_para": "vender_fragmento"
+      },
+      {"texto": "Voltar à loja", "ir_para": "loja_vila"}
+    ]
+  },
+  "vender_pele": {
+    "cenario": "vila.mp4",
+    "titulo": "ITEM VENDIDO",
+    "linhas": ["Você vendeu a Pele de Lobo por 18 moedas."],
+    "efeitos": [{"remover_item": {"item": "pele_lobo", "quantidade": 1}}, {"add_ouro": 18}],
+    "opcoes": [{"texto": "Continuar no balcão", "ir_para": "vender_materiais"}]
+  },
+  "vender_presa": {
+    "cenario": "vila.mp4",
+    "titulo": "ITEM VENDIDO",
+    "linhas": ["Você vendeu a Presa Sombria por 15 moedas."],
+    "efeitos": [{"remover_item": {"item": "presa_sombria", "quantidade": 1}}, {"add_ouro": 15}],
+    "opcoes": [{"texto": "Continuar no balcão", "ir_para": "vender_materiais"}]
+  },
+  "vender_fragmento": {
+    "cenario": "vila.mp4",
+    "titulo": "ITEM VENDIDO",
+    "linhas": ["Você vendeu o Fragmento Rúnico por 25 moedas."],
+    "efeitos": [{"remover_item": {"item": "fragmento_runico", "quantidade": 1}}, {"add_ouro": 25}],
+    "opcoes": [{"texto": "Continuar no balcão", "ir_para": "vender_materiais"}]
+  },
+  "floresta_inicial": {
+    "cenario": "floresta.mp4",
+    "titulo": "FLORESTA DE ARKHOR — O COMBATE",
+    "linhas": [
+      "Entre a névoa espessa, olhos amarelos reluzem sob a vegetação.",
+      "Um Lobo Sombrio salta rugindo com dentes à mostra!",
+      "",
+      "Atenção: Ferimentos de mordidas podem causar sangramento contínuo!"
+    ],
+    "combate_inimigo": "lobo_sombrio",
+    "vitoria_destino": "pos_combate_lobo"
+  },
+  "pos_combate_lobo": {
+    "cenario": "floresta.mp4",
+    "titulo": "FLORESTA DE ARKHOR — O ENCONTRO",
+    "linhas": [
+      "A fera tomba sem vida sobre as folhas secas.",
+      "Surgindo silenciosamente entre os troncos, uma figura encapuzada observa você.",
+      "\"Essa marca em sua mão... ela pertencia à linhagem real de Arkhor.\"",
+      "\"Se ela despertou, as ruínas ancestrais já sabem de sua volta.\""
+    ],
+    "opcoes": [
+      {"texto": "Ouvir o conselho do Mago", "ir_para": "dialogo_mago"},
+      {"texto": "Ignorá-lo e marchar às ruínas", "ir_para": "ruinas"}
+    ]
+  },
+  "dialogo_mago": {
+    "cenario": "floresta.mp4",
+    "titulo": "O MAGO DA FLORESTA",
+    "linhas": [
+      "\"O rei Aurelion selou o castelo antes do cataclismo.\"",
+      "\"Tome este Pergaminho Antigo. As ruínas na montanha possuem",
+      "câmaras secretas que só se abrirão para quem conhece as palavras arcanas.\""
+    ],
+    "efeitos": [
+      {"set_flag": "confia_mago", "valor": true},
+      {"add_item": "pergaminho_antigo"},
+      {"add_xp": 45},
+      {"add_reputacao": 10},
+      {"add_missao": "missao_mago"}
+    ],
+    "opcoes": [
+      {"texto": "Avançar até as Ruínas de Arkhor", "ir_para": "ruinas"}
+    ]
+  },
+  "ruinas": {
+    "cenario": "ruinas.mp4",
+    "titulo": "CAPÍTULO II — AS RUÍNAS DE ARKHOR",
+    "linhas": [
+      "Paredes megalíticas cobertas de hera revelam passagens ancestrais.",
+      "A energia arcana das pedras ressoa intensamente com a marca em seu braço.",
+      "Para onde deseja direcionar sua exploração?"
+    ],
+    "efeitos": [
+      {"set_flag": "entrou_ruinas", "valor": true},
+      {"add_missao": "missao_ruinas"}
+    ],
+    "opcoes": [
+      {"texto": "Sala dos Guerreiros (Desafio de Força)", "ir_para": "sala_guerreiros"},
+      {"texto": "Biblioteca Perdida (Sabedoria Arcana)", "ir_para": "biblioteca"},
+      {"texto": "Cripta Subterrânea (Catacumbas Antigas)", "ir_para": "cripta"},
+      {
+        "texto": "Câmara Secreta de Aurelion [Requer Pergaminho]",
+        "requer_item": {"item": "pergaminho_antigo", "quantidade": 1},
+        "ir_para": "sala_secreta_ruinas"
+      }
+    ]
+  },
+  "sala_secreta_ruinas": {
+    "cenario": "ruinas.mp4",
+    "titulo": "SANTUÁRIO OCULTO DE AURELION",
+    "linhas": [
+      "Ao desenrolar o Pergaminho Antigo, o símbolo na parede se ilumina em dourado.",
+      "Uma porta de pedra secreta desliza revelando o relicário secreto do rei!",
+      "Dentro de uma arca mágica repousam poções raras e um antigo pergaminho de poder."
+    ],
+    "efeitos": [
+      {"add_item": "elixir_arkhor"},
+      {"add_item": "pocao_mana"},
+      {"add_ouro": 100},
+      {"add_xp": 90},
+      {"add_reputacao": 15}
+    ],
+    "opcoes": [
+      {"texto": "Subir em direção à Montanha Negra", "ir_para": "capitulo_3"}
+    ]
+  },
+  "sala_guerreiros": {
+    "cenario": "guerreiros.mp4",
+    "titulo": "SALA DOS GUERREIROS — O GUARDIÃO",
+    "linhas": [
+      "Estátuas colossais de pedra guardam um pedestal de mármore.",
+      "Ao se aproximar, os olhos de rubi da estátua central se acendem!",
+      "O Guardião de Pedra se levanta rangendo granito com punhos erguidos."
+    ],
+    "combate_inimigo": "guardiao_pedra",
+    "vitoria_destino": "recompensa_guerreiros"
+  },
+  "recompensa_guerreiros": {
+    "cenario": "guerreiros.mp4",
+    "titulo": "SALA DOS GUERREIROS — SAQUE",
+    "linhas": [
+      "O guardião racha e desmorona em blocos de granito.",
+      "No pedestal repousava a autêntica Lâmina Real de Arkhor (+14 Ataque)!",
+      "Seu ataque marcial foi permanentemente aprimorado."
+    ],
+    "efeitos": [
+      {"add_item": "espada_arkhor"},
+      {"add_xp": 80}
+    ],
+    "opcoes": [
+      {"texto": "Seguir até a Montanha Negra", "ir_para": "capitulo_3"}
+    ]
+  },
+  "biblioteca": {
+    "cenario": "biblioteca.mp4",
+    "titulo": "BIBLIOTECA PERDIDA",
+    "linhas": [
+      "Prateleiras imensas guardam segredos arcanos intocados há séculos.",
+      "Ao tocar no Tomo dos Reis de Arkhor, um vórtice de luz permeia sua mente.",
+      "Sua capacidade máxima de mana foi expandida (+25 MP Max) e toda mana restaurada!"
+    ],
+    "efeitos": [
+      {"add_item": "livro_arkhor"},
+      {"add_mana_max": 25},
+      {"curar_tudo": true},
+      {"add_xp": 80}
+    ],
+    "opcoes": [
+      {"texto": "Prosseguir para a Montanha Negra", "ir_para": "capitulo_3"}
+    ]
+  },
+  "cripta": {
+    "cenario": "cripta.mp4",
+    "titulo": "A CRIPTA SUBTERRÂNEA",
+    "linhas": [
+      "Você desce por escadarias úmidas rodeadas por alcovas funerárias.",
+      "Um esqueleto em armadura ancestral de placas negras empunha sua espada!",
+      "O Cavaleiro Morto se ergue para testar sua legitimidade até a morte."
+    ],
+    "combate_inimigo": "cavaleiro_morto",
+    "vitoria_destino": "recompensa_cripta"
+  },
+  "recompensa_cripta": {
+    "cenario": "cripta.mp4",
+    "titulo": "CRIPTAS — RELÍQUIA RECUPERADA",
+    "linhas": [
+      "O esqueleto armadurado tomba em definitivo diante de sua lâmina.",
+      "Você resgata a Couraça do Guardião Antigo (+12 Defesa) do sarcófago.",
+      "Sua defesa física foi massivamente ampliada."
+    ],
+    "efeitos": [
+      {"add_item": "armadura_guardiao"},
+      {"add_xp": 100}
+    ],
+    "opcoes": [
+      {"texto": "Subir em direção à Montanha Negra", "ir_para": "capitulo_3"}
+    ]
+  },
+  "capitulo_3": {
+    "cenario": "ponte.mp4",
+    "titulo": "CAPÍTULO III — A PONTE DA MONTANHA",
+    "linhas": [
+      "Uma ponte de pedra estreita cruza um abismo sem fundo.",
+      "Tempestades elétricas iluminam a silhueta do imponente Castelo Negro.",
+      "Sentinelas de armaduras negras bloqueiam a passagem principal."
+    ],
+    "opcoes": [
+      {"texto": "Enfrentar o Guarda Negro em combate", "ir_para": "combate_guarda"},
+      {"texto": "Buscar passagem estreita na rocha (Atalho Furtivo)", "ir_para": "atalho_ponte"},
+      {
+        "texto": "Exibir a Runa Real de Arkhor (Comandar os Guardas)",
+        "requer_reputacao": 20,
+        "ir_para": "diplomacia_marca"
+      }
+    ]
+  },
+  "combate_guarda": {
+    "cenario": "ponte.mp4",
+    "titulo": "CONFRONTO NA PONTE",
+    "linhas": [
+      "O Guarda Negro desembainha sua alabarda de ferro maciço!",
+      "O vento ruge sobre o abismo enquanto o combate se inicia."
+    ],
+    "combate_inimigo": "guarda_negro",
+    "vitoria_destino": "capitulo_4"
+  },
+  "atalho_ponte": {
+    "cenario": "ponte.mp4",
+    "titulo": "PASSAGEM NAS ESCARPAS",
+    "linhas": [
+      "Contornando as fendas rochosas sob a névoa, você avança despercebido.",
+      "Você economizou suas energias e poções para o desafio supremo!"
+    ],
+    "efeitos": [
+      {"add_xp": 65}
+    ],
+    "opcoes": [
+      {"texto": "Alcançar os portões do Castelo", "ir_para": "capitulo_4"}
+    ]
+  },
+  "diplomacia_marca": {
+    "cenario": "ponte.mp4",
+    "titulo": "A REVERÊNCIA DOS GUARDAS",
+    "linhas": [
+      "Ao erguer a mão, a runa brilha com intensidade solar.",
+      "Os guardas reconhecem o brasão sagrado de Aurelion e caem de joelhos!",
+      "\"Seja bem-vindo de volta, nobre soberano de Arkhor!\""
+    ],
+    "efeitos": [
+      {"add_xp": 90},
+      {"add_reputacao": 25}
+    ],
+    "opcoes": [
+      {"texto": "Adentrar os grandes portões do Castelo Negro", "ir_para": "capitulo_4"}
+    ]
+  },
+  "capitulo_4": {
+    "cenario": "castelo.mp4",
+    "titulo": "CAPÍTULO IV — O TRONO ANCESTRAL",
+    "linhas": [
+      "Os salões internos do Castelo Negro encontram-se desertos.",
+      "No salão abobadado do trono, uma sombra descomunal se ergue entre brasas.",
+      "\"Você veio reivindicar a herança de Aurelion, mortal?\"",
+      "O Dragão Ancestral ruge, estalando labaredas pelas presas titânicas."
+    ],
+    "opcoes": [
+      {"texto": "Iniciar Batalha Decisiva contra o Dragão", "ir_para": "batalha_final"}
+    ]
+  },
+  "batalha_final": {
+    "cenario": "castelo.mp4",
+    "titulo": "O DESTINO DE ARKHOR — BATALHA FINAL",
+    "linhas": [
+      "O chão treme sob o bater das asas do Dragão Ancestral!",
+      "Atenção aos sinais de intenção: defenda-se quando as mandíbulas incandescerem!"
+    ],
+    "combate_inimigo": "dragao_ancestral",
+    "vitoria_destino": "escolha_final"
+  },
+  "escolha_final": {
+    "cenario": "castelo.mp4",
+    "titulo": "A QUEDA DO DRAGÃO — A ESCOLHA DO HERDEIRO",
+    "linhas": [
+      "O colosso de escamas tomba de joelhos no mármore rachado.",
+      "O silêncio ecoa pela primeira vez em três séculos dentro do salão do trono.",
+      "A energia da marca transborda em seu peito.",
+      "O destino de toda Arkhor está unicamente em suas mãos."
+    ],
+    "opcoes": [
+      {
+        "texto": "1. Reconstruir Arkhor e reinar com justiça junto ao povo",
+        "ir_para": "final_restauracao"
+      },
+      {
+        "texto": "2. Selar o trono e as magias para sempre, libertando o mundo",
+        "ir_para": "final_selo"
+      },
+      {
+        "texto": "3. Absorver a chama do Dragão e assumir o trono como Soberano Sombrio",
+        "ir_para": "final_tirania"
+      }
+    ]
+  },
+  "final_restauracao": {
+    "cenario": "castelo.mp4",
+    "titulo": "FINAL: A ERA DA RESTAURAÇÃO (REI JUSTO)",
+    "linhas": [
+      "Você recusa a ganância do poder absoluto e abre os portões aos sobreviventes.",
+      "Vila Lúmen prospera e se torna a capital do renascido Reino de Arkhor.",
+      "Elora e o povo coroam você sob a luz solar que finalmente rasga as tempestades.",
+      "",
+      "Parabéns! Você alcançou o Final da Luz e da Justiça!"
+    ],
+    "opcoes": [
+      {"texto": "Retornar ao Menu Principal", "ir_para": "menu_principal"}
+    ]
+  },
+  "final_selo": {
+    "cenario": "castelo.mp4",
+    "titulo": "FINAL: O SELO ETERNO (LIBERTAÇÃO)",
+    "linhas": [
+      "Compreendendo que a magia arcana causou a ruína de Aurelion, você quebra a coroa.",
+      "Com o auxílio dos rituais arcanos, as portas do castelo são lacradas por eras.",
+      "Livre do fardo da marca, você caminha rumo ao horizonte como um homem livre.",
+      "",
+      "Parabéns! Você encerrou a maldição ancestral das cinzas!"
+    ],
+    "opcoes": [
+      {"texto": "Retornar ao Menu Principal", "ir_para": "menu_principal"}
+    ]
+  },
+  "final_tirania": {
+    "cenario": "castelo.mp4",
+    "titulo": "FINAL: O SOBERANO DAS SOMBRAS (TIRANIA)",
+    "linhas": [
+      "A essência ígnea do Dragão é absorvida pela runa em seu braço, cobrindo seu corpo de escamas negras.",
+      "Com poder infinito e olhos em chamas, você se senta no trono de granito de Aurelion.",
+      "Todos os reinos das montanhas temerão a nova dinastia que renasceu das sombras.",
+      "",
+      "Parabéns! Você conquistou o Trono de Arkhor pelo poder absoluto!"
+    ],
+    "opcoes": [
+      {"texto": "Retornar ao Menu Principal", "ir_para": "menu_principal"}
+    ]
+  },
+  "derrota": {
+    "cenario": "menu.mp4",
+    "titulo": "VOCÊ TOMBOU EM COMBATE (PERMADEATH)",
+    "linhas": [
+      "Seus pontos de vida se esgotaram.",
+      "As sombras de Arkhor consumiram sua determinação.",
+      "O seu arquivo de save foi permanentemente apagado (Wipe).",
+      "",
+      "Inicie um novo jogo para recomeçar com uma nova linhagem."
+    ],
+    "opcoes": [
+      {"texto": "Retornar ao Menu Principal", "ir_para": "menu_principal"}
+    ]
+  },
+  "nenhum_save": {
+    "cenario": "menu.mp4",
+    "titulo": "NENHUM SAVE ENCONTRADO",
+    "linhas": [
+      "Não há nenhum progresso salvo disponível em save_arkadia.json",
+      "(ou o seu herói tombou em combate e sofreu Wipe).",
+      "",
+      "Inicie um Novo Jogo para começar sua jornada."
+    ],
+    "opcoes": [
+      {"texto": "Novo Jogo", "ir_para": "selecao_classe"},
+      {"texto": "Voltar ao Menu", "ir_para": "menu_principal"}
+    ]
+  }
+}
