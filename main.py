@@ -129,6 +129,7 @@ class JogoArkhor:
 
         self.fontes = {
             "titulo": pygame.font.SysFont("georgia", 22, bold=True),
+            "titulo_pequeno": pygame.font.SysFont("georgia", 17, bold=True),
             "texto": pygame.font.SysFont("arial", 16),
             "ui": pygame.font.SysFont("arial", 14, bold=True),
             "ui_pequena": pygame.font.SysFont("arial", 12, bold=True)
@@ -163,7 +164,7 @@ class JogoArkhor:
 
         # Executa efeitos da cena (XP, ouro, itens, flags)
         if self.jogador:
-            novos_avisos = executar_efeitos_cena(dados_cena, self.jogador)
+            novos_avisos = executar_efeitos_cena(dados_cena, self.jogador, cena_id=cena_id)
             if novos_avisos:
                 self.mensagens_dialogo.extend(["", "• " + " | ".join(novos_avisos)])
 
@@ -186,8 +187,6 @@ class JogoArkhor:
         self.botoes.clear()
         x_base = 580
         largura_btn = 360
-        altura_btn = 36
-        espacamento = 7
 
         opcoes_validas = []
         for op in opcoes:
@@ -195,7 +194,15 @@ class JogoArkhor:
             callback = self._criar_callback_opcao(op)
             opcoes_validas.append((op["texto"], callback, habilitado))
 
-        y_inicial = ALTURA - 20 - (len(opcoes_validas) * (altura_btn + espacamento))
+        qtd = len(opcoes_validas)
+        if qtd >= 5:
+            altura_btn = 33
+            espacamento = 6
+        else:
+            altura_btn = 36
+            espacamento = 7
+
+        y_inicial = max(ALTURA_CENARIO + 44, ALTURA - 16 - (qtd * (altura_btn + espacamento)))
 
         for i, (label, cb, hab) in enumerate(opcoes_validas):
             rect = (x_base, y_inicial + i * (altura_btn + espacamento), largura_btn, altura_btn)
@@ -244,16 +251,12 @@ class JogoArkhor:
         if not mc:
             return
 
-        self.titulo_atual = f"COMBATE CONTRA {mc.inimigo['nome'].upper()}"
-        self.mensagens_dialogo = [
-            f"Turno {mc.turno_atual}  |  Fraquezas: {', '.join(mc.inimigo['fraquezas']).upper() or 'Nenhuma'}",
-            f"Resistências: {', '.join(mc.inimigo['resistencias']).upper() or 'Nenhuma'}",
-            ""
-        ] + mc.log_combate[-3:]
+        self.titulo_atual = f"COMBATE: {mc.inimigo['nome'].upper()} (TURNO {mc.turno_atual})"
+        self.mensagens_dialogo = list(mc.log_combate[-3:])
 
-        # Opções de ação no combate
+        # Opções de ação no combate divididas em Ataques/Skills (topo) e Tático/Itens (grade 2x2)
         self.botoes.clear()
-        acoes = [
+        acoes_ataque = [
             ("1. Ataque Normal", mc.acao_ataque_normal, True)
         ]
 
@@ -261,40 +264,56 @@ class JogoArkhor:
         skills = obter_skills_disponiveis(self.jogador)
         for s in skills:
             tem_mp = self.jogador["mana"] >= s.get("custo_mp", 10)
-            acoes.append((
+            acoes_ataque.append((
                 f"> {s['nome']} ({s.get('custo_mp')} MP)",
                 lambda sk=s: mc.acao_usar_skill(sk),
                 tem_mp
             ))
 
-        # Defesa e poções
-        acoes.append(("🛡 Defender (+MP / -65% Dano)", mc.acao_defender, True))
-
         inv = self.jogador.get("inventario", [])
         qtd_hp = inv.count("pocao_vida") + inv.count("elixir_arkhor")
         qtd_mp = inv.count("pocao_mana")
         qtd_ant = inv.count("antidoto")
+        tem_status = bool(self.jogador.get("status"))
 
-        acoes.append((f"🧪 Poção de Vida ({qtd_hp})", mc.acao_usar_pocao_vida, qtd_hp > 0))
-        acoes.append((f"🔷 Poção de Mana ({qtd_mp})", mc.acao_usar_pocao_mana, qtd_mp > 0))
-        if self.jogador.get("status"):
-            acoes.append((f"🌿 Antídoto ({qtd_ant})", mc.acao_usar_antidoto, qtd_ant > 0))
+        acoes_grade = [
+            ("[Defesa] +MP / -65% Dano", mc.acao_defender, True),
+            (f"[HP] Poção de Vida ({qtd_hp})", mc.acao_usar_pocao_vida, qtd_hp > 0),
+            (f"[MP] Poção de Mana ({qtd_mp})", mc.acao_usar_pocao_mana, qtd_mp > 0),
+            (f"[Cura] Antídoto ({qtd_ant})", mc.acao_usar_antidoto, qtd_ant > 0 and tem_status)
+        ]
 
-        # Monta os botões na tela
         x_base = 580
         largura_btn = 360
-        altura_btn = 34
-        espacamento = 6
-        y_inicial = ALTURA - 20 - (len(acoes) * (altura_btn + espacamento))
 
-        for i, (label, cb, hab) in enumerate(acoes):
-            rect = (x_base, y_inicial + i * (altura_btn + espacamento), largura_btn, altura_btn)
-            # Envolve o callback para atualizar a UI pós-ação
-            def acao_wrapper(fn=cb):
+        def criar_wrapper(fn):
+            def acao_wrapper():
                 fn()
                 if self.motor_combate:
                     self.atualizar_interface_combate()
-            self.botoes.append(Botao(rect, label, acao_wrapper, self.fontes["ui"], fonte_pequena=self.fontes["ui_pequena"], habilitado=hab))
+            return acao_wrapper
+
+        # 1. Botões superiores de Ataque e Habilidades (largura total)
+        alt_atk = 28
+        esp_atk = 4
+        y_grade_topo = ALTURA - 80
+        y_ini_atk = max(ALTURA_CENARIO + 44, y_grade_topo - 6 - len(acoes_ataque) * (alt_atk + esp_atk))
+
+        for i, (label, cb, hab) in enumerate(acoes_ataque):
+            rect = (x_base, y_ini_atk + i * (alt_atk + esp_atk), largura_btn, alt_atk)
+            self.botoes.append(Botao(rect, label, criar_wrapper(cb), self.fontes["ui"], fonte_pequena=self.fontes["ui_pequena"], habilitado=hab))
+
+        # 2. Grade 2x2 inferior (Defesa e Consumíveis)
+        larg_col = 176
+        alt_col = 30
+        esp_x = 8
+        esp_y = 6
+        for idx, (label, cb, hab) in enumerate(acoes_grade):
+            lin = idx // 2
+            col = idx % 2
+            rx = x_base + col * (larg_col + esp_x)
+            ry = y_grade_topo + lin * (alt_col + esp_y)
+            self.botoes.append(Botao((rx, ry, larg_col, alt_col), label, criar_wrapper(cb), self.fontes["ui_pequena"], fonte_pequena=self.fontes["ui_pequena"], habilitado=hab))
 
     def vitoria_combate(self, destino, drops, xp, ouro, msgs_xp):
         self.motor_combate = None

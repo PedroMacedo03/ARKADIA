@@ -145,8 +145,10 @@ def desenhar_painel_narrativo(
     inimigo_info=None
 ):
     fonte_titulo = fontes["titulo"]
+    fonte_titulo_peq = fontes.get("titulo_pequeno", fontes["ui"])
     fonte_texto = fontes["texto"]
     fonte_ui = fontes["ui"]
+    fonte_pequena = fontes.get("ui_pequena", fonte_ui)
 
     # Fundo do painel inferior
     rect_painel = pygame.Rect(0, altura_cenario, largura_tela, altura_tela - altura_cenario)
@@ -186,39 +188,62 @@ def desenhar_painel_narrativo(
         if jogador.get("status"):
             tags = " ".join([f"[{st.upper()}]" for st in jogador["status"].keys()])
             txt_st = fonte_ui.render(tags, True, (255, 100, 100))
+            if x_dinamico + txt_st.get_width() > largura_tela - 10:
+                txt_st = fonte_pequena.render(tags, True, (255, 100, 100))
             tela.blit(txt_st, (x_dinamico, altura_cenario + 11))
 
-    # Título da cena
-    titulo_surf = fonte_titulo.render(titulo, True, COR_DESTAQUE)
-    tela.blit(titulo_surf, (22, altura_cenario + 48))
-
-    # Intenção do inimigo (se estiver em combate)
-    y_offset = altura_cenario + 82
     largura_maxima_dialogo = x_divisor - 44
 
+    # Título da cena com auto-ajuste para nunca cruzar o divisor vertical
+    if fonte_titulo.size(titulo)[0] <= largura_maxima_dialogo:
+        titulo_surf = fonte_titulo.render(titulo, True, COR_DESTAQUE)
+    elif fonte_titulo_peq.size(titulo)[0] <= largura_maxima_dialogo:
+        titulo_surf = fonte_titulo_peq.render(titulo, True, COR_DESTAQUE)
+    else:
+        titulo_surf = fonte_ui.render(titulo, True, COR_DESTAQUE)
+    tela.blit(titulo_surf, (22, altura_cenario + 46))
+
+    # Intenção do inimigo (se estiver em combate)
+    y_offset = altura_cenario + 78
+
     if inimigo_info:
-        desenhar_barra(tela, 22, y_offset, 250, 18, inimigo_info["vida"], inimigo_info["vida_max"], (200, 40, 90), (60, 20, 30), f"{inimigo_info['nome']} [{inimigo_info['vida']}/{inimigo_info['vida_max']}]", fonte_ui)
+        desenhar_barra(tela, 22, y_offset, 235, 18, inimigo_info["vida"], inimigo_info["vida_max"], (200, 40, 90), (60, 20, 30), f"{inimigo_info['nome']} [{inimigo_info['vida']}/{inimigo_info['vida_max']}]", fonte_pequena)
+        fraq = ", ".join(inimigo_info.get("fraquezas", [])).upper() or "Nenhuma"
+        res = ", ".join(inimigo_info.get("resistencias", [])).upper() or "Nenhuma"
+        txt_elem = fonte_pequena.render(f"Fraq: {fraq}  |  Res: {res}", True, COR_TEXTO_MUTED)
+        tela.blit(txt_elem, (268, y_offset + 2))
         y_offset += 24
 
     if intencao_inimiga:
-        rect_int = pygame.Rect(22, y_offset, largura_maxima_dialogo, 26)
+        aviso_str = f"Intenção: {intencao_inimiga.get('aviso', '')}"
+        larg_util_int = largura_maxima_dialogo - 14
+        if fonte_ui.size(aviso_str)[0] <= larg_util_int:
+            linhas_int = [fonte_ui.render(aviso_str, True, COR_INTENCAO_TEXTO)]
+        elif fonte_pequena.size(aviso_str)[0] <= larg_util_int:
+            linhas_int = [fonte_pequena.render(aviso_str, True, COR_INTENCAO_TEXTO)]
+        else:
+            sub_int = quebrar_texto(aviso_str, fonte_pequena, larg_util_int)
+            linhas_int = [fonte_pequena.render(s, True, COR_INTENCAO_TEXTO) for s in sub_int]
+
+        alt_box = max(25, 8 + len(linhas_int) * 16)
+        rect_int = pygame.Rect(22, y_offset, largura_maxima_dialogo, alt_box)
         pygame.draw.rect(tela, COR_INTENCAO_FUNDO, rect_int, border_radius=4)
         pygame.draw.rect(tela, COR_INTENCAO_BORDA, rect_int, width=1, border_radius=4)
-        aviso = intencao_inimiga.get("aviso", "")
-        txt_int = fonte_ui.render(f"Intenção: {aviso}", True, COR_INTENCAO_TEXTO)
-        tela.blit(txt_int, (28, y_offset + 5))
-        y_offset += 32
+        for idx, surf_i in enumerate(linhas_int):
+            tela.blit(surf_i, (28, y_offset + 4 + idx * 16))
+        y_offset += alt_box + 6
 
     # Linhas de texto narrativo com QUEBRA AUTOMÁTICA para nunca vazar
     for linha in linhas:
         if not linha:
-            y_offset += 12
+            y_offset += 10
             continue
         sublinhas = quebrar_texto(linha, fonte_texto, largura_maxima_dialogo)
         for subl in sublinhas:
-            txt_surf = fonte_texto.render(subl, True, COR_TEXTO)
-            tela.blit(txt_surf, (22, y_offset))
-            y_offset += 21
+            if y_offset + 18 <= altura_tela - 4:
+                txt_surf = fonte_texto.render(subl, True, COR_TEXTO)
+                tela.blit(txt_surf, (22, y_offset))
+            y_offset += 20
 
     # Desenhar os botões de ação
     for botao in botoes:

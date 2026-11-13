@@ -27,10 +27,10 @@
   "antidoto": {
     "nome": "Antídoto Herbal",
     "tipo": "consumivel",
-    "descricao": "Ervas medicinais que curam envenenamento e queimadura.",
+    "descricao": "Ervas medicinais que curam envenenamento, queimadura e sangramento.",
     "preco_compra": 20,
     "preco_venda": 10,
-    "cura_status": ["veneno", "queimadura"]
+    "cura_status": ["veneno", "queimadura", "sangramento"]
   },
   "espada_ferro": {
     "nome": "Espada de Ferro",

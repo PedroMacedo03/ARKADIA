@@ -268,11 +268,11 @@ class MotorCombate:
     def turno_companheiro(self):
         # Se Elora estiver ativa
         if self.jogador.get("flags", {}).get("companheiro_elora"):
-            # 40% chance de curar ou desferir suporte
+            # 45% chance de curar ou desferir suporte
             if random.random() < 0.45:
                 cura = random.randint(18, 30)
                 self.jogador["vida"] = min(self.jogador["vida_max"], self.jogador["vida"] + cura)
-                self.log_combate.append(f"✦ Elora arremessou um unguento de ervas curativas! (+{cura} HP)")
+                self.log_combate.append(f"[Suporte] Elora aplicou ervas curativas! (+{cura} HP)")
 
     def turno_inimigo(self):
         # Reduz buffs do inimigo

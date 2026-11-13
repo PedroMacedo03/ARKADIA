@@ -91,7 +91,8 @@
       {"texto": "Conversar com Elora (Companheira / Missões)", "ir_para": "dialogo_elora"},
       {"texto": "Mercador de Lúmen (Comprar / Vender)", "ir_para": "loja_vila"},
       {"texto": "Descansar na Fogueira (Recuperar HP e MP)", "ir_para": "fogueira_descanso"},
-      {"texto": "Marchar para a Floresta Profunda", "ir_para": "floresta_inicial"}
+      {"texto": "Marchar para a Floresta Profunda", "ir_para": "floresta_inicial"},
+      {"texto": "Retornar às Ruínas de Arkhor", "requer_flag": "entrou_ruinas", "ir_para": "ruinas"}
     ]
   },
   "dialogo_elora": {
@@ -102,7 +103,14 @@
       "\"Se você nos trouxer 2 Peles de Lobo Sombrio, posso lhe recompensar",
       "com um Elixir sagrado guardado por minha família.\""
     ],
+    "efeitos": [
+      {"add_missao": "missao_cacada"}
+    ],
     "opcoes": [
+      {
+        "texto": "Caçar Lobos na Estrada Velha (Obter Peles)",
+        "ir_para": "cacada_lobos"
+      },
       {
         "texto": "Entregar 2 Peles de Lobo (Concluir Missão)",
         "requer_item": {"item": "pele_lobo", "quantidade": 2},
@@ -116,6 +124,16 @@
       },
       {"texto": "Voltar à praça da vila", "ir_para": "hub_vila"}
     ]
+  },
+  "cacada_lobos": {
+    "cenario": "floresta.mp4",
+    "titulo": "ESTRADA VELHA — CAÇADA",
+    "linhas": [
+      "Você patrulha os arredores nebulosos da estrada de Lúmen.",
+      "Um Lobo Sombrio emerge rosnando dentre os arbustos!"
+    ],
+    "combate_inimigo": "lobo_sombrio",
+    "vitoria_destino": "dialogo_elora"
   },
   "recrutar_elora": {
     "cenario": "vila.mp4",
@@ -136,7 +154,7 @@
   },
   "entrega_peles_lobo": {
     "cenario": "vila.mp4",
-    "titulo": "MISSÃO CUMPRIDA — SEGURANÇA DAS ESTRADAS",
+    "titulo": "MISSÃO CUMPRIDA — ESTRADAS SEGURAS",
     "linhas": [
       "Elora recebe as peles com gratidão profunda nos olhos.",
       "\"Isso manterá nossas crianças aquecidas nas noites gélidas de Arkhor!\"",
@@ -273,7 +291,8 @@
     ],
     "opcoes": [
       {"texto": "Ouvir o conselho do Mago", "ir_para": "dialogo_mago"},
-      {"texto": "Ignorá-lo e marchar às ruínas", "ir_para": "ruinas"}
+      {"texto": "Ignorá-lo e marchar às ruínas", "ir_para": "ruinas"},
+      {"texto": "Retornar à Vila Lúmen (Refúgio / Loja)", "ir_para": "hub_vila"}
     ]
   },
   "dialogo_mago": {
@@ -292,7 +311,8 @@
       {"add_missao": "missao_mago"}
     ],
     "opcoes": [
-      {"texto": "Avançar até as Ruínas de Arkhor", "ir_para": "ruinas"}
+      {"texto": "Avançar até as Ruínas de Arkhor", "ir_para": "ruinas"},
+      {"texto": "Retornar à Vila Lúmen (Refúgio / Loja)", "ir_para": "hub_vila"}
     ]
   },
   "ruinas": {
@@ -315,7 +335,8 @@
         "texto": "Câmara Secreta de Aurelion",
         "requer_item": {"item": "pergaminho_antigo", "quantidade": 1},
         "ir_para": "sala_secreta_ruinas"
-      }
+      },
+      {"texto": "Retornar à Vila Lúmen (Refúgio / Loja)", "ir_para": "hub_vila"}
     ]
   },
   "sala_secreta_ruinas": {
@@ -492,7 +513,7 @@
   },
   "escolha_final": {
     "cenario": "castelo.mp4",
-    "titulo": "A QUEDA DO DRAGÃO — A ESCOLHA DO HERDEIRO",
+    "titulo": "A ESCOLHA DO HERDEIRO DE ARKHOR",
     "linhas": [
       "O colosso de escamas tomba de joelhos no mármore rachado.",
       "O silêncio ecoa pela primeira vez em três séculos dentro do salão do trono.",
@@ -516,7 +537,7 @@
   },
   "final_restauracao": {
     "cenario": "castelo.mp4",
-    "titulo": "FINAL: A ERA DA RESTAURAÇÃO (REI JUSTO)",
+    "titulo": "FINAL: ERA DA RESTAURAÇÃO",
     "linhas": [
       "Você recusa a ganância do poder absoluto e abre os portões aos sobreviventes.",
       "Vila Lúmen prospera e se torna a capital do renascido Reino de Arkhor.",
@@ -544,7 +565,7 @@
   },
   "final_tirania": {
     "cenario": "castelo.mp4",
-    "titulo": "FINAL: O SOBERANO DAS SOMBRAS (TIRANIA)",
+    "titulo": "FINAL: SOBERANO DAS SOMBRAS",
     "linhas": [
       "A essência ígnea do Dragão é absorvida pela runa em seu braço, cobrindo seu corpo de escamas negras.",
       "Com poder infinito e olhos em chamas, você se senta no trono de granito de Aurelion.",
@@ -558,7 +579,7 @@
   },
   "derrota": {
     "cenario": "menu.mp4",
-    "titulo": "VOCÊ TOMBOU EM COMBATE (PERMADEATH)",
+    "titulo": "DERROTA EM COMBATE (PERMADEATH)",
     "linhas": [
       "Seus pontos de vida se esgotaram.",
       "As sombras de Arkhor consumiram sua determinação.",

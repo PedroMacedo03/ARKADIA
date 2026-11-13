@@ -119,7 +119,7 @@
         "id": "corte_espectral",
         "nome": "Corte da Morte",
         "dano_mult": 1.35,
-        "aviso": "A lâmina do Cavaleiro Morto brilha em verde espectral preparando um golpe mortal!"
+        "aviso": "A lâmina do Cavaleiro brilha em verde preparando um golpe mortal!"
       }
     ]
   },
@@ -196,7 +196,7 @@
             "dano_mult": 1.3,
             "status": "queimadura",
             "duracao_status": 3,
-            "aviso": "O Dragão estala as presas incandescentes preparando uma rajada de fogo infernal!"
+            "aviso": "O Dragão estala as presas preparando uma rajada de fogo infernal!"
           }
         ]
       },
@@ -210,7 +210,7 @@
             "dano_mult": 0.7,
             "status": "atordoado",
             "duracao_status": 1,
-            "aviso": "O Dragão ruge com poder ensurdecedor fazendo os pilares do salão tremerem!"
+            "aviso": "O Dragão ruge com fúria fazendo os pilares do salão tremerem!"
           },
           {
             "id": "meteoro_chamas",
@@ -218,7 +218,7 @@
             "dano_mult": 1.45,
             "status": "queimadura",
             "duracao_status": 3,
-            "aviso": "Labaredas negras emergem do peito do Dragão... um golpe avassalador está por vir!"
+            "aviso": "Labaredas negras emergem do Dragão... um golpe brutal está por vir!"
           }
         ]
       },
@@ -230,7 +230,7 @@
             "id": "explosao_solar",
             "nome": "Explosão de Aurelion",
             "dano_mult": 1.6,
-            "aviso": "O Dragão concentra toda a energia ígnea restante em uma supernova devastadora!"
+            "aviso": "O Dragão concentra toda sua energia ígnea em uma supernova mortal!"
           }
         ]
       }

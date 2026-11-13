@@ -64,9 +64,27 @@ def verificar_requisito_opcao(opcao, jogador):
 
     return True
 
-def executar_efeitos_cena(cena, jogador):
+CENAS_REPETIVEIS = {
+    "fogueira_descanso",
+    "comprar_pocao_vida",
+    "comprar_pocao_mana",
+    "comprar_antidoto",
+    "vender_pele",
+    "vender_presa",
+    "vender_fragmento",
+    "entrega_peles_lobo",
+    "recrutar_elora"
+}
+
+def executar_efeitos_cena(cena, jogador, cena_id=None):
     if not jogador or "efeitos" not in cena:
         return []
+
+    visitadas = jogador.setdefault("cenas_recompensadas", [])
+    if cena_id and cena_id not in CENAS_REPETIVEIS:
+        if cena_id in visitadas:
+            return []
+        visitadas.append(cena_id)
 
     mensagens = []
     flags = jogador.setdefault("flags", {})

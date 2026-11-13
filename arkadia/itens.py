@@ -56,8 +56,21 @@ def adicionar_ao_inventario(jogador, item_id, quantidade=1):
 
     for _ in range(quantidade):
         jogador["inventario"].append(item_id)
-    
+
     nome = obter_nome_item(item_id)
+
+    # Auto-equipa armas e armaduras superiores ao obtê-las
+    if tipo == "arma":
+        atual = obter_item(jogador.get("arma_equipada", "")) if jogador.get("arma_equipada") else {}
+        if info.get("ataque", 0) > atual.get("ataque", 0):
+            equipar_item(jogador, item_id)
+            return True, f"{nome} equipado automaticamente!"
+    elif tipo == "armadura":
+        atual = obter_item(jogador.get("armadura_equipada", "")) if jogador.get("armadura_equipada") else {}
+        if info.get("defesa", 0) > atual.get("defesa", 0):
+            equipar_item(jogador, item_id)
+            return True, f"{nome} equipado automaticamente!"
+
     return True, f"+{quantidade}x {nome} adicionado ao inventário."
 
 def remover_do_inventario(jogador, item_id, quantidade=1):

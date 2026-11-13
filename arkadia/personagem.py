@@ -199,7 +199,7 @@ def ganhar_xp(jogador, qtd):
         recalcular_atributos(jogador)
         jogador["mana"] = jogador["mana_max"]
 
-        mensagens.append(f"★ NÍVEL {jogador['nivel']} ALCANÇADO! Status ampliados.")
+        mensagens.append(f"[LEVEL UP] NÍVEL {jogador['nivel']} ALCANÇADO! Status ampliados.")
 
         # Verifica se novas skills foram desbloqueadas
         for skill in TABELA_SKILLS.get(jogador["classe"], []):
