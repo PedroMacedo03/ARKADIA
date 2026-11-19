@@ -124,3 +124,26 @@ python main.py
 ### Comparação com a versão inicial do projeto
 - Na primeira versão ([terminal_rpg.py](file:///F:/PEDRO/Estudos/ESTÁCIO/SEGUNDO%20PERIODO/PARADIGMAS%20EM%20PYTHON/EXERCICIOS/Jogo%20RPG/terminal_rpg.py)), tudo ficava num arquivo único de **2.078 linhas**.
 - Na versão final (`v1.0`), aplicamos **modularização e separação de responsabilidades**: cada assunto virou um arquivo dentro do pacote `arkadia/`, e o `main.py` ficou com apenas **396 linhas**, servindo como o controlador que importa as peças.
+
+---
+
+## 4. O Python trabalha melhor com essa construção do código fragmentada? Por que existem instâncias onde o `main.py` vai instanciando cada parte "ao vivo" / na chamada?
+
+**Resposta curta para falar em sala:**
+> "Sim, principalmente para organização, testes e economia de memória. Em velocidade pura, depois que o Python importa os arquivos uma vez, dá quase na mesma. Mas dividir em módulos evita um arquivo gigante de 2.000 linhas (como era no `terminal_rpg.py`). E o `main.py` vai instanciando as peças 'ao vivo' — só quando são chamadas — para não gastar memória RAM à toa abrindo todos os vídeos e combates logo na tela de menu, além de manter cada objeto vivo apenas enquanto ele faz sentido."
+
+### 1. Por que o código fragmentado (modularizado) é melhor?
+
+1. **Testabilidade isolada:** com o código dividido, o [test_verificacao.py](file:///F:/PEDRO/Estudos/ESTÁCIO/SEGUNDO%20PERIODO/PARADIGMAS%20EM%20PYTHON/EXERCICIOS/Jogo%20RPG/test_verificacao.py) consegue importar só o `MotorCombate` ou só `itens.py` e testar dano e inventário **sem precisar abrir a janela gráfica do jogo**.
+2. **Separação de responsabilidades:** na versão antiga (`terminal_rpg.py`), tudo ficava misturado em **2.078 linhas**. Na versão final (`v1.0`), cada assunto tem seu arquivo (`ui.py`, `combate.py`, `estado.py`).
+3. **Escopo limpo (*namespace*):** cada módulo tem suas próprias variáveis, evitando conflitos de nomes.
+4. **Sem perda de velocidade:** o Python só lê cada `.py` do disco **na primeira vez** que ele é importado (depois fica em cache na memória e em bytecode `__pycache__`).
+
+### 2. Por que o `main.py` instancia cada parte "ao vivo" na chamada?
+
+1. **Ciclo de vida dos objetos (só existe enquanto é usado):**
+   No [main.py](file:///F:/PEDRO/Estudos/ESTÁCIO/SEGUNDO%20PERIODO/PARADIGMAS%20EM%20PYTHON/EXERCICIOS/Jogo%20RPG/main.py#L239-L246), `self.motor_combate` começa como `None`. Quando o jogador entra em batalha (`iniciar_combate`), um `MotorCombate` novo é **instanciado na hora** para aquela luta; quando termina (`vitoria_combate` ou `derrota_combate`), volta a `None` e a memória é liberada. Isso garante que cada combate comece zerado, sem dados residuais da luta anterior.
+2. **Carregamento sob demanda (*Lazy Loading*) e economia de memória:**
+   Vídeos `.mp4` são pesados. Em `GerenciadorCenarios.obter_cenario()`, o `VideoCenario` só é aberto na **primeira vez** que o jogador entra naquela cena (ficando em cache em `self.videos`). Se você nunca visitar a Cripta, `cripta.mp4` nem é carregado na memória. O mesmo vale para os botões (`montar_botoes_cena()`).
+3. **O `main.py` como Maestro (Orquestrador / Baixo Acoplamento):**
+   Em vez de um módulo chamar o outro em círculo, o `JogoArkhor` no `main.py` mantém o loop a 60 FPS rodando sem travar e só aciona ou instancia a peça necessária no momento exato do clique, recebendo o resultado de volta via retorno ou *callback*.
